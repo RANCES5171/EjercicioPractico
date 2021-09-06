@@ -1,0 +1,149 @@
+﻿@model EjercicioPractico.Models.Prospecto
+
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-horizontal">
+    <h2>Agregar Prospecto</h2>
+</div>
+@{ var numArchivos = 1; }
+@using (Ajax.BeginForm("Agregar", "Prospecto",
+                        new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            OnFailure = "onFailureResult",
+                            OnSuccess = "onSuccessResult"
+                        },
+                        new { id = "AjaxForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_apellidoP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_apellidoP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_apellidoP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_apellidoM, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_apellidoM, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_apellidoM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_calle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_calle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_calle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_num, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_num, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_num, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_colonia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_colonia, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_colonia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_cp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_cp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_cp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_tel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_tel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_tel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_rfc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_rfc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pros_rfc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row" id="Archivos">
+            <div class="col-25">
+                <label>Nombre del archivo</label>
+            </div>
+            <div class="col-40">
+                <input type="text" name="NomArchivo" />
+            </div>
+            <div class="col-25">
+                <input type="file" name="Formulario" id="Formulario+@numArchivos.ToString();" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25B">
+                <button type="button" class="btnB" id="Agregar">Agregar archivo</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25B">
+                <input type="submit" value="Registrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        var onSuccessResult = function () {
+            alert("Registro Exitoso");
+        };
+    </script>
+    <script>
+        var onFailureResult = function () {
+            alert("Error al Registrar");
+        };
+    </script>
+    <script>
+        var numeroForm = 1;
+        $("#Agregar").click(function () {
+            numeroForm += 1;
+            $("#Archivos").append(
+                "<div class=\"col-25\"> <label>Nombre del archivo</label></div>" +
+                "<div class=\"col-40\"><input type=\"text\" name=\"NomArchivo\"/></div>" +
+                "<div class=\"col-25\"><input type=\"file\" id=Formulario" + numeroForm + " name=Formulario ></div>"
+            );
+        });
+
+    </script>
+}

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EjemploProspectosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Prospecto">
+          <Key>
+            <PropertyRef Name="pros_id" />
+          </Key>
+          <Property Name="pros_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pros_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pros_apellidoP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pros_apellidoM" Type="varchar" MaxLength="50" />
+          <Property Name="pros_calle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pros_num" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="pros_colonia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pros_cp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pros_tel" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="pros_rfc" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="pros_estatus" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="pros_notas" Type="text" Nullable="false" />
+          <Property Name="pros_rutas" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EjemploProspectosModelStoreContainer">
+          <EntitySet Name="Prospecto" EntityType="Self.Prospecto" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EjemploProspectosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Prospecto">
+          <Key>
+            <PropertyRef Name="pros_id" />
+          </Key>
+          <Property Name="pros_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pros_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_apellidoP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_apellidoM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pros_calle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_num" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_colonia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_cp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_tel" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_rfc" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_estatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_notas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pros_rutas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EjemploProspectosContex" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Prospecto" EntityType="Self.Prospecto" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EjemploProspectosModelStoreContainer" CdmEntityContainer="EjemploProspectosContex">
+          <EntitySetMapping Name="Prospecto">
+            <EntityTypeMapping TypeName="EjemploProspectosModel.Prospecto">
+              <MappingFragment StoreEntitySet="Prospecto">
+                <ScalarProperty Name="pros_id" ColumnName="pros_id" />
+                <ScalarProperty Name="pros_nombre" ColumnName="pros_nombre" />
+                <ScalarProperty Name="pros_apellidoP" ColumnName="pros_apellidoP" />
+                <ScalarProperty Name="pros_apellidoM" ColumnName="pros_apellidoM" />
+                <ScalarProperty Name="pros_calle" ColumnName="pros_calle" />
+                <ScalarProperty Name="pros_num" ColumnName="pros_num" />
+                <ScalarProperty Name="pros_colonia" ColumnName="pros_colonia" />
+                <ScalarProperty Name="pros_cp" ColumnName="pros_cp" />
+                <ScalarProperty Name="pros_tel" ColumnName="pros_tel" />
+                <ScalarProperty Name="pros_rfc" ColumnName="pros_rfc" />
+                <ScalarProperty Name="pros_estatus" ColumnName="pros_estatus" />
+                <ScalarProperty Name="pros_notas" ColumnName="pros_notas" />
+                <ScalarProperty Name="pros_rutas" ColumnName="pros_rutas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

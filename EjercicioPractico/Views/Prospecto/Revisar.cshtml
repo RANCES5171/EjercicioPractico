@@ -1,0 +1,130 @@
+﻿@model IEnumerable<EjercicioPractico.Models.Prospecto>
+
+@{
+    ViewBag.Title = "Revisar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-horizontal">
+    <h2>Lista Prospectos</h2>
+</div>
+<div class="form-horizontal">
+    <table class="table" id="tblProspecto">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.pros_nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pros_apellidoP)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pros_apellidoM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pros_estatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pros_notas)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.pros_nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pros_apellidoP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pros_apellidoM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pros_estatus)
+                </td>
+                <td>
+                    <button type="button" onclick="Mostrar(@item.pros_id)" class="btnC" id="@item.pros_id">Ver</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="form-horizontal" id="Detalles">
+
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+        function Mostrar(id) {
+
+            $.ajax({
+                type: "POST",
+                url: "ConsultaRevision",
+                data: { id: id },
+                success: function (data) {
+                    modal.style.display = "block";
+                    $('#Detalles').html(data);
+                }, error: function (data) {
+                    console.log(data);
+                    alert(data);
+                }
+            });
+        }
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    </script>
+    <script>
+        function Aprovar(id) {
+            $.ajax({
+                type: "POST",
+                url: "Aprovar",
+                data: {
+                    id: id,
+                    notas: $("textarea#pros_notas").val()
+                },
+                success: function (data) {
+                    alert("Actualización Exitosa")
+                    location.reload();
+                }, error: function (data) {
+                    alert("Fallo al actualizar")
+                }
+            });
+        }
+        function Rechazar(id) {
+            $.ajax({
+                type: "POST",
+                url: "Rechazar",
+                data: {
+                    id: id,
+                    notas: $("textarea#pros_notas").val()
+                },
+                success: function (data) {
+                    alert("Actualización Exitosa")
+                    location.reload();
+                }, error: function (data) {
+                    alert("Fallo al actualizar")
+                }
+            });
+        }
+        
+    </script>
+}
+

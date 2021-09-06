@@ -1,0 +1,122 @@
+﻿@model EjercicioPractico.Models.Prospecto
+<form method="post">
+    <div class="form-horizontal">
+        <h2>Detalles Revision</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_nombre, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_nombre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_apellidoP, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_apellidoP, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_apellidoP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_apellidoM, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_apellidoM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_apellidoM, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_calle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_calle, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_calle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_num, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_num, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_num, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_colonia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_colonia, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_colonia, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_cp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_cp, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_cp, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_tel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_tel, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_tel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.pros_rfc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_rfc, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.pros_rfc, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.pros_estatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-75">
+                @Html.EditorFor(model => model.pros_estatus, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.pros_notas, htmlAttributes: new { @class = "control-label col-md-2", id = "notas" })
+            <div class="col-75">
+                @Html.TextAreaFor(model => model.pros_notas, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="row" id="Archivos">
+            <label>Archivos</label>
+            <div class="col-75">
+                @{
+                    string Documentos = Model.pros_rutas;
+                    string[] RutasDoc = Documentos.Split(';');
+
+                    foreach (var Ruta in RutasDoc)
+                    {
+                        if (Ruta != null && Ruta != "")
+                        {
+                            <div class="row">
+                                @Html.ActionLink(Ruta, "GetReport", "Prospecto", new { path = Ruta }, new { target = "_blank" })
+                            </div>
+                        }
+
+                    }
+                }
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            Acción
+            <div class="col-75">
+                <button type="button" onclick="Aprovar(@Model.pros_id)" class="btnC">Autorizar</button>
+                <button type="button" onclick="Rechazar(@Model.pros_id)" class="btnCRed">Rechazar</button>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+</form>
